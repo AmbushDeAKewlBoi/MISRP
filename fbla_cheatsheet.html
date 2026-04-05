@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FBLA Tech Solutions Cheatsheet</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0f1117;
+      --bg-card: #1a1d27;
+      --bg-subtle: #141720;
+      --border: rgba(255,255,255,0.06);
+      --text-primary: #e8e9ed;
+      --text-secondary: #8b8fa3;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-main: #f5f6f8;
+        --bg-card: #ffffff;
+        --bg-subtle: #f0f1f4;
+        --border: rgba(0,0,0,0.08);
+        --text-primary: #1a1d27;
+        --text-secondary: #6b7085;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .wrapper {
+      padding: 24px 16px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header { text-align: center; margin-bottom: 28px; }
+    .header-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .header-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    /* Category nav */
+    .cat-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .cat-btn {
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1 1 auto;
+      justify-content: center;
+      min-width: 140px;
+      transition: all 0.15s ease;
+    }
+    .cat-btn:hover { transform: translateY(-1px); }
+    .cat-icon { font-size: 16px; }
+
+    /* Section header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toggle-btn {
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.15s;
+    }
+    .toggle-btn:hover { opacity: 0.85; }
+
+    /* Comparison table */
+    .table-wrap { overflow-x: auto; margin: 16px 0; }
+    .comp-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 12.5px;
+      font-family: 'DM Sans', sans-serif;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .comp-table th {
+      padding: 12px 14px;
+      font-weight: 700;
+      text-align: left;
+      font-size: 12.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .comp-table td {
+      padding: 10px 14px;
+      line-height: 1.4;
+      vertical-align: top;
+    }
+
+    /* Memory tricks */
+    .memory-block {
+      margin: 16px 0;
+      padding: 16px;
+      border-radius: 12px;
+    }
+    .memory-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    .memory-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+    .memory-emoji { font-size: 18px; }
+    .memory-tool { font-weight: 700; min-width: 90px; }
+    .memory-trick { color: var(--text-secondary); }
+
+    /* Tool cards */
+    .tools-list { display: flex; flex-direction: column; gap: 10px; }
+    .tool-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .tool-header {
+      width: 100%;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text-primary);
+    }
+    .tool-logo { font-size: 32px; flex-shrink: 0; }
+    .tool-info { flex: 1; }
+    .tool-name-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .tool-name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .tool-tagline {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .tool-chevron {
+      font-size: 18px;
+      color: var(--text-secondary);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .tool-chevron.expanded { transform: rotate(180deg); }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* Tool body */
+    .tool-body { padding: 0 24px 24px; }
+    .tool-body-inner { border-top: 1px solid var(--border); padding-top: 20px; }
+
+    /* Section label */
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+    .mb-12 { margin-bottom: 12px; }
+
+    /* List items */
+    .li-item {
+      display: flex;
+      gap: 8px;
+      line-height: 1.5;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+    .li-bullet { flex-shrink: 0; }
+
+    /* Roleplay quote */
+    .roleplay-quote {
+      margin: 14px 0;
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+      font-size: 13.5px;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    /* Pros/Cons */
+    .pros-cons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    /* Cost box */
+    .cost-box {
+      margin: 14px 0 6px;
+      padding: 10px 14px;
+      background: var(--bg-subtle);
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-secondary);
+    }
+
+    /* Use case */
+    .use-case {
+      margin-top: 16px;
+      padding: 16px;
+      background: var(--bg-subtle);
+      border-radius: 14px;
+    }
+    .use-case-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+    .use-case-scenario {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 32px;
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      text-align: center;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .footer strong { color: var(--text-primary); }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <div class="header-label">FBLA Role-Play Reference</div>
+    <h1 class="header-title">Tech Solutions Cheatsheet</h1>
+    <div class="header-subtitle">Updated April 2026 — Automation · Databases · Deployment · Integration · AI</div>
+  </div>
+
+  <div class="cat-nav" id="cat-nav"></div>
+
+  <div class="section-header">
+    <h2 class="section-title" id="section-title"></h2>
+    <button class="toggle-btn" id="toggle-btn"></button>
+  </div>
+
+  <div id="comparison-wrap"></div>
+  <div id="memory-wrap"></div>
+  <div class="tools-list" id="tools-list"></div>
+
+  <div class="footer">
+    <strong>Pro Tip for Role-Play:</strong> Always match the tool to the scenario's scale.
+    Enterprise problem? → n8n, PostgreSQL, NGINX, MuleSoft, NemoClaw.
+    Small biz? → Zapier, Firebase, Traefik, Power Automate, HubSpot AI.
+    Say <em>why</em> you chose it, not just <em>what</em> it does.
+  </div>
+</div>
+
+<script>
+const CATEGORIES = [
+  { id: "automation", label: "Workflow Automation", icon: "⚡", color: "#6366f1" },
+  { id: "databases", label: "Databases", icon: "🗄️", color: "#0ea5e9" },
+  { id: "deployment", label: "Web Servers & Deployment", icon: "🌐", color: "#10b981" },
+  { id: "integration", label: "Integration & APIs", icon: "🔗", color: "#f59e0b" },
+  { id: "ai", label: "AI & Agents", icon: "🤖", color: "#ec4899" },
+];
+
+const TOOLS = {
+  automation: [
+    {
+      name: "n8n",
+      tier: "Enterprise / Power Users",
+      tagline: "Open-Source, Self-Hosted Workflow Automation",
+      logo: "🟣",
+      what: [
+        "Open-source workflow automation with 400+ built-in integrations",
+        "Hybrid no-code/code — visual drag-and-drop builder + custom JavaScript/Python at any step",
+        "Self-hosted option gives unlimited executions & full data ownership",
+        "Built-in AI Agent nodes for chaining LLM calls into workflows",
+        "Enterprise features: SSO/SAML, RBAC, audit logs, Git-based version control",
+      ],
+      when: [
+        "Company needs full control over data (healthcare, finance, government)",
+        "High-volume automation where per-task pricing would be expensive",
+        "Technical team wants to embed custom code or AI logic into workflows",
+        "Regulated industry requiring on-prem deployment & audit trails",
+      ],
+      roleplay: '"For secure, scalable automation, we recommend n8n — it can be self-hosted so sensitive data never leaves our infrastructure, and the self-hosted version is free with unlimited executions, making it far more cost-effective at scale than SaaS alternatives."',
+      pros: [
+        "Self-hosted = free with unlimited executions",
+        "Full data privacy — nothing leaves your servers",
+        "Write real JS/Python inside workflows",
+        "Native AI agent support for agentic workflows",
+        "Used by 34% of Fortune 500 companies",
+      ],
+      cons: [
+        "Self-hosting requires DevOps skills (Docker, databases)",
+        "Steeper learning curve than Zapier",
+        "Fewer pre-built integrations than Zapier (400+ vs 8,000+)",
+      ],
+      cost: "Self-hosted: Free (unlimited) · Cloud: €24/mo starter → €800/mo business",
+      useCase: {
+        title: "Hospital System — HIPAA-Compliant Patient Data Processing",
+        scenario: "A hospital network needs to sync patient records across 12 facilities, trigger alerts for critical lab results, and generate compliance reports — all without data leaving their private network.",
+        how: [
+          "Self-hosted on hospital servers — zero patient data exposure to cloud",
+          "AI Agent nodes analyze lab results and flag abnormalities to physicians",
+          "Automated HIPAA audit trail logging for every data movement",
+          "Git-based workflow versioning so IT can track every change",
+        ],
+      },
+    },
+    {
+      name: "Make (formerly Integromat)",
+      tier: "Mid-Size Business",
+      tagline: "Visual Automation for Growing Teams",
+      logo: "🟡",
+      what: [
+        "Visual scenario builder with advanced branching, routing, and error handling",
+        "3,000+ app integrations including AI tools (OpenAI, Claude, etc.)",
+        "Credit-based pricing — pay per operation, not per workflow",
+        "Advanced data transformation: iterators, aggregators, JSON/XML handling",
+        "SOC 2 Type II and GDPR compliant",
+      ],
+      when: [
+        "Business needs complex multi-branch workflows (not just linear A→B)",
+        "Team wants visual debugging — see data flowing through each step",
+        "Integrating AI into business processes (summarization, classification)",
+        "Agency or mid-size company managing multiple client automations",
+      ],
+      roleplay: '"For our marketing and operations workflows, Make gives us a powerful visual builder to create complex automations with conditional logic and AI steps — at about half the cost of Zapier for the same volume."',
+      pros: [
+        "Most powerful visual builder — routers, filters, conditional logic",
+        "3,000+ integrations with native AI support",
+        "Cheaper than Zapier for complex, multi-step workflows",
+        "Great for debugging — see exact data at every step",
+        "Free plan: 1,000 credits/month",
+      ],
+      cons: [
+        "Credits burn fast with complex scenarios (every step = 1 credit)",
+        "Learning curve for field mapping and data structures",
+        "Support can be slow on lower tiers",
+      ],
+      cost: "Free: 1,000 credits · Core: $9/mo · Pro: $18/mo · Teams: $34/mo · Enterprise: Custom",
+      useCase: {
+        title: "E-Commerce Brand — AI-Powered Order & Review Pipeline",
+        scenario: "A Shopify store processes 500+ orders/day and wants to auto-route support tickets, generate AI responses to reviews, and sync inventory with their warehouse system.",
+        how: [
+          "Shopify order triggers → route to fulfillment or flag for review based on rules",
+          "AI module (Claude/GPT) drafts personalized responses to customer reviews",
+          "Inventory sync between Shopify, warehouse API, and Google Sheets backup",
+          "Error handler auto-retries failed API calls and alerts the team on Slack",
+        ],
+      },
+    },
+    {
+      name: "Zapier",
+      tier: "Small Business / Non-Technical",
+      tagline: "No-Code Automation for Everyone",
+      logo: "🟠",
+      what: [
+        "Connects 8,000+ apps with zero coding required",
+        "Task-based pricing — only pay for completed actions (filters are free)",
+        "AI actions built in: summarize, classify, extract, generate with AI",
+        "Pre-built templates for common business workflows",
+        "Tables feature for storing and managing automation data",
+      ],
+      when: [
+        "Non-technical team needs quick, simple automations",
+        "Connecting niche or legacy apps (largest integration library)",
+        "Small business automating marketing emails, CRM updates, notifications",
+        "Need something running in under 10 minutes",
+      ],
+      roleplay: '"Instead of manually updating customer records, we can use Zapier to automate CRM updates, order tracking, and email notifications — no developer needed, and we can be live in minutes."',
+      pros: [
+        "Easiest to use — truly no-code",
+        "8,000+ integrations (largest library)",
+        "Filters/paths don't count as tasks (saves money)",
+        "Built-in AI features for text processing",
+        "Huge template library for common workflows",
+      ],
+      cons: [
+        "Most expensive per-task at scale",
+        "Limited for complex branching logic",
+        "Less control over data transformation",
+      ],
+      cost: "Free: 100 tasks/mo · Starter: $19.99/mo · Professional: $49/mo · Team: $69/mo",
+      useCase: {
+        title: "Local Bakery — Automated Order & Marketing Pipeline",
+        scenario: "A small bakery takes orders via a Google Form and wants to auto-send confirmation emails, update their spreadsheet tracker, and post new menu items to social media.",
+        how: [
+          "Google Form submission → auto-send confirmation email via Gmail",
+          "New row added to Google Sheets → Slack notification to kitchen staff",
+          "New Instagram post → auto-share to Facebook and Twitter",
+          "Weekly digest of orders → auto-generated summary email to owner",
+        ],
+      },
+    },
+  ],
+  databases: [
+    {
+      name: "PostgreSQL",
+      tier: "Enterprise / Advanced",
+      tagline: "The World's Most Advanced Open-Source Relational Database",
+      logo: "🐘",
+      what: [
+        "Full ACID compliance with advanced SQL features",
+        "Handles complex queries, JSON data, and full-text search",
+        "Extensible with custom functions, data types, and plugins",
+        "Strong community with massive documentation",
+        "Used by Apple, Instagram, Spotify, and the US government",
+      ],
+      when: [
+        "Complex data relationships (users ↔ orders ↔ products ↔ reviews)",
+        "Need advanced queries: window functions, CTEs, recursive queries",
+        "Mixing structured (SQL) and semi-structured (JSON) data",
+        "Enterprise application requiring reliability and data integrity",
+      ],
+      roleplay: '"For our e-commerce platform handling complex product relationships and transaction data, PostgreSQL gives us ACID-compliant reliability with the flexibility to store JSON metadata — all with zero licensing costs."',
+      pros: [
+        "Free and open-source",
+        "Most feature-rich SQL database",
+        "Handles both relational and JSON data",
+        "Excellent for large datasets and complex queries",
+      ],
+      cons: [
+        "Higher learning curve than MySQL",
+        "Requires more memory for optimal performance",
+        "Setup/tuning requires database expertise",
+      ],
+      cost: "Free (open-source) · Managed: ~$15-50/mo on cloud providers",
+      useCase: {
+        title: "University Enrollment System",
+        scenario: "A university needs to track students, courses, professors, grades, and financial aid — with complex relationships between all entities and strict data integrity requirements.",
+        how: [
+          "Relational schema enforces referential integrity (no orphaned records)",
+          "Complex queries: 'Show all students with GPA > 3.5 who haven't registered for next semester'",
+          "JSON columns store flexible metadata (extracurriculars, preferences)",
+          "Row-level security controls access by role (admin vs. advisor vs. student)",
+        ],
+      },
+    },
+    {
+      name: "MongoDB",
+      tier: "Mid-Size / Flexible Schema",
+      tagline: "Document Database for Modern Applications",
+      logo: "🍃",
+      what: [
+        "Stores data as flexible JSON-like documents (no rigid schema)",
+        "Horizontal scaling — distribute data across multiple servers easily",
+        "Atlas cloud service: fully managed with built-in search & analytics",
+        "Great for rapid prototyping — schema can evolve with your app",
+        "ACID transactions supported since v4.0",
+      ],
+      when: [
+        "Data structure changes frequently (startup / MVP phase)",
+        "Building content management, social media, or catalog applications",
+        "Need horizontal scaling for large unstructured datasets",
+        "Real-time analytics on semi-structured data",
+      ],
+      roleplay: "\"For our content platform where each post can have different fields and metadata, MongoDB's flexible document model lets us iterate quickly without costly schema migrations.\"",
+      pros: [
+        "No rigid schema — documents can vary in structure",
+        "Scales horizontally across servers",
+        "Atlas provides free tier (512 MB)",
+        "Great developer experience with native JSON",
+      ],
+      cons: [
+        "Not ideal for highly relational data",
+        "Can use more storage than SQL for same data",
+        "Complex joins are less efficient than in SQL",
+      ],
+      cost: "Free (Community) · Atlas Free Tier: 512 MB · Paid: ~$57/mo and up",
+      useCase: {
+        title: "Social Media App — User Profiles & Posts",
+        scenario: "A social platform needs to store user profiles (which vary wildly — some have bios, some have portfolios, some have nothing) and posts with different media types.",
+        how: [
+          "Flexible documents: each user profile can have different fields",
+          "Embedded subdocuments for comments, likes, and media attachments",
+          "Atlas Search for full-text search across posts",
+          "Horizontal sharding as user base grows to millions",
+        ],
+      },
+    },
+    {
+      name: "Google Firebase (Firestore)",
+      tier: "Small Business / Mobile Apps",
+      tagline: "Real-Time Cloud Database with Zero Backend Code",
+      logo: "🔥",
+      what: [
+        "Real-time data syncing — updates appear instantly across all clients",
+        "Serverless — no backend server to manage",
+        "Built-in authentication, hosting, and cloud functions",
+        "Offline support — app works without internet, syncs when reconnected",
+        "Generous free tier (Spark plan)",
+      ],
+      when: [
+        "Building a mobile app or real-time web app",
+        "Need instant data sync (chat apps, live dashboards, collaborative tools)",
+        "Small team without backend developers",
+        "Prototyping quickly with minimal infrastructure",
+      ],
+      roleplay: '"For our customer-facing mobile app, Firebase gives us real-time syncing, built-in auth, and offline support out of the box — and the free tier handles our first 50,000 daily reads."',
+      pros: [
+        "Real-time sync across all connected clients",
+        "No server management needed",
+        "Built-in auth (Google, Apple, email, phone)",
+        "Generous free tier for startups",
+      ],
+      cons: [
+        "Vendor lock-in (Google Cloud)",
+        "Complex queries are limited compared to SQL",
+        "Costs can spike unpredictably at scale",
+      ],
+      cost: "Free (Spark): 50K reads/day · Blaze: Pay-as-you-go (~$0.06/100K reads)",
+      useCase: {
+        title: "Food Delivery Startup — Real-Time Order Tracking",
+        scenario: "A local food delivery service needs customers and drivers to see order status updates in real time, with the app working even in areas with spotty cell service.",
+        how: [
+          "Firestore real-time listeners push order status changes instantly to all devices",
+          "Offline persistence lets drivers update delivery status without signal",
+          "Firebase Auth handles customer and driver login securely",
+          "Cloud Functions trigger notifications when orders are ready or delivered",
+        ],
+      },
+    },
+  ],
+  deployment: [
+    {
+      name: "NGINX",
+      tier: "Enterprise / High Performance",
+      tagline: "Industry-Standard Reverse Proxy & Load Balancer",
+      logo: "🟢",
+      what: [
+        "High-performance reverse proxy and load balancer",
+        "Handles 10,000+ concurrent connections with minimal resources",
+        "Blue-Green deployment: switch between servers with a config change",
+        "SSL/TLS termination, caching, and compression built-in",
+        "Powers ~34% of the world's web servers",
+      ],
+      when: [
+        "Need a reverse proxy in front of application servers (Node.js, Python, etc.)",
+        "Blue-Green deployment with instant traffic switching",
+        "High-traffic site needing load balancing across multiple servers",
+        "Static content serving and caching for performance",
+      ],
+      roleplay: '"We deploy NGINX as our reverse proxy and load balancer — it handles SSL termination, routes traffic between our Blue and Green servers for zero-downtime deployments, and its caching layer reduces our origin server load by 70%."',
+      pros: [
+        "Extremely lightweight and fast",
+        "Free and open-source",
+        "Industry standard for reverse proxying",
+        "Easy Blue-Green switching via config reload",
+      ],
+      cons: [
+        "Config syntax has a learning curve",
+        "Dynamic module loading less flexible than Apache",
+        "Advanced features (Plus) require paid license ($2,500/yr)",
+      ],
+      cost: "Free (Open Source) · NGINX Plus: $2,500/yr",
+      useCase: {
+        title: "SaaS Company — Zero-Downtime Blue-Green Deployment",
+        scenario: "A B2B SaaS platform pushes updates weekly and needs zero-downtime deployments with instant rollback capability.",
+        how: [
+          "Two identical server environments (Blue + Green) behind NGINX",
+          "Deploy updates to inactive environment, run tests",
+          "Change NGINX upstream config and reload — traffic switches instantly",
+          "If issues detected, reload previous config for instant rollback",
+        ],
+      },
+    },
+    {
+      name: "AWS Elastic Beanstalk",
+      tier: "Mid-Size / Cloud-Native",
+      tagline: "Managed Deployment with Built-In Blue-Green Support",
+      logo: "☁️",
+      what: [
+        "Fully managed deployment, scaling, and load balancing on AWS",
+        "Built-in Blue-Green deployment with URL swap",
+        "Auto-scaling based on traffic patterns",
+        "Health monitoring with automatic instance replacement",
+        "Supports Node.js, Python, Java, .NET, Docker, and more",
+      ],
+      when: [
+        "Already using AWS infrastructure",
+        "Want managed deployment without server administration",
+        "Need auto-scaling for variable traffic patterns",
+        "Team prefers cloud-managed over self-hosted",
+      ],
+      roleplay: '"Using AWS Elastic Beanstalk, we get managed Blue-Green deployments with a URL swap — AWS handles health checks, auto-scaling, and rollback automatically, letting our team focus on code rather than infrastructure."',
+      pros: [
+        "Fully managed — AWS handles patching, scaling, monitoring",
+        "Native Blue-Green deployment support",
+        "Auto-scaling and load balancing built in",
+        "Pay only for underlying AWS resources",
+      ],
+      cons: [
+        "AWS vendor lock-in",
+        "More expensive than self-hosted NGINX",
+        "Less control over infrastructure details",
+      ],
+      cost: "No extra charge — pay for EC2, RDS, etc. (~$20-200+/mo depending on usage)",
+      useCase: {
+        title: "E-Commerce Platform — Holiday Traffic Scaling",
+        scenario: "An online retailer expects 10x traffic during Black Friday and needs their app to scale automatically without crashing.",
+        how: [
+          "Elastic Beanstalk auto-scaling adds EC2 instances as traffic increases",
+          "Load balancer distributes requests across all healthy instances",
+          "Blue-Green environment swap for deploying holiday features safely",
+          "Health monitoring auto-replaces unhealthy instances",
+        ],
+      },
+    },
+    {
+      name: "Traefik",
+      tier: "Small-Mid / Containerized Apps",
+      tagline: "Auto-Discovery Reverse Proxy for Docker & Kubernetes",
+      logo: "🔵",
+      what: [
+        "Automatically discovers services in Docker/Kubernetes — no manual config",
+        "Built-in Let's Encrypt for free, auto-renewing SSL certificates",
+        "Dynamic routing based on container labels",
+        "Dashboard for monitoring traffic and health",
+        "Perfect for microservices architectures",
+      ],
+      when: [
+        "Running Docker containers or Kubernetes clusters",
+        "Want automatic SSL without manual cert management",
+        "Microservices architecture with services spinning up/down",
+        "Small-to-mid team managing containerized applications",
+      ],
+      roleplay: "\"With Traefik in front of our Docker stack, new services are automatically discovered and routed — and every service gets a free SSL certificate from Let's Encrypt without any manual setup.\"",
+      pros: [
+        "Auto-discovers Docker/K8s services",
+        "Free SSL via Let's Encrypt",
+        "Open-source and free",
+        "Great dashboard for monitoring",
+      ],
+      cons: [
+        "Complex setup outside containerized environments",
+        "Fewer load balancing algorithms than NGINX/HAProxy",
+        "Smaller community than NGINX",
+      ],
+      cost: "Free (Open Source) · Traefik Enterprise: Custom pricing",
+      useCase: {
+        title: "Startup — Microservices with Auto-SSL",
+        scenario: "A startup runs 8 microservices in Docker and needs each one to be publicly accessible with SSL, without manually configuring routing for every new service.",
+        how: [
+          "Add Docker labels to each container → Traefik auto-routes traffic",
+          "Let's Encrypt integration auto-provisions and renews SSL certs",
+          "New service deployed → Traefik detects it within seconds",
+          "Dashboard shows real-time traffic per service for debugging",
+        ],
+      },
+    },
+  ],
+  integration: [
+    {
+      name: "MuleSoft (Anypoint Platform)",
+      tier: "Enterprise",
+      tagline: "Enterprise Integration Platform for Large-Scale Systems",
+      logo: "🧩",
+      what: [
+        "Enterprise integration platform connecting applications, data, and devices via reusable APIs",
+        "API-led connectivity: System, Process, and Experience API layers",
+        "Enterprise-grade security with OAuth, SAML, and encryption",
+        "DataWeave language for complex data transformations",
+        "Used by Coca-Cola, Unilever, Barclays, and 60% of Fortune 500",
+      ],
+      when: [
+        "Connecting 10+ enterprise systems (ERP, CRM, HR, Finance)",
+        "Regulated industry needing audit trails and compliance (HIPAA, PCI-DSS, SOX)",
+        "Building a company-wide API strategy with reusable components",
+        "Large-scale data transformation between incompatible systems",
+      ],
+      roleplay: "\"To unify our Sales Portal, CRM, HR Platform, and ERP into a single ecosystem, MuleSoft's API-led approach lets us build reusable integration layers — so when we add a new system, it plugs in without rebuilding everything.\"",
+      pros: [
+        "Gold standard for enterprise integration",
+        "API-first architecture with reuse",
+        "Enterprise security and compliance built in",
+        "Massive ecosystem of pre-built connectors",
+      ],
+      cons: [
+        "Very expensive ($100K+/year)",
+        "Requires certified developers",
+        "Overkill for small businesses",
+      ],
+      cost: "Enterprise pricing: ~$100,000+/year",
+      useCase: {
+        title: "Bank — Unifying Core Banking, CRM, and Mobile App",
+        scenario: "A regional bank needs to connect their legacy core banking system, Salesforce CRM, mobile app, and regulatory reporting — with full audit trails for compliance.",
+        how: [
+          "System APIs wrap legacy core banking (COBOL) with modern REST interfaces",
+          "Process APIs orchestrate cross-system workflows (loan approval, KYC)",
+          "Experience APIs power the mobile app and customer portal",
+          "Full audit logging for regulatory compliance (SOX, PCI-DSS)",
+        ],
+      },
+    },
+    {
+      name: "Power Automate (Microsoft)",
+      tier: "Mid-Size / Microsoft Ecosystem",
+      tagline: "Workflow Automation Native to Microsoft 365",
+      logo: "⚙️",
+      what: [
+        "Automates workflows across Microsoft 365 (Teams, Outlook, SharePoint, Excel)",
+        "1,000+ connectors including Salesforce, SAP, and custom APIs",
+        "Desktop flows for legacy app automation (RPA)",
+        "AI Builder for document processing, prediction, and text analysis",
+        "Copilot integration for natural-language workflow creation",
+      ],
+      when: [
+        "Company already uses Microsoft 365 / Teams / SharePoint",
+        "Need to automate approval workflows, report generation, data sync",
+        "Want desktop RPA to automate legacy Windows applications",
+        "Non-technical users need to build their own automations",
+      ],
+      roleplay: "\"Since we're already on Microsoft 365, Power Automate lets our team automate report generation from Excel, approval workflows in Teams, and document processing with AI Builder — all without leaving the Microsoft ecosystem.\"",
+      pros: [
+        "Native Microsoft 365 integration",
+        "AI Builder for document/text processing",
+        "Desktop RPA for legacy apps",
+        "Copilot can generate flows from descriptions",
+      ],
+      cons: [
+        "Limited outside Microsoft ecosystem",
+        "Complex flows can be slow to execute",
+        "Premium connectors require higher-tier license",
+      ],
+      cost: "Basic: $15/user/mo · Premium: $40/user/mo · Often included in M365 E3/E5",
+      useCase: {
+        title: "Insurance Company — Automated Claims Processing",
+        scenario: "An insurance firm receives claims via email with attached documents and needs to extract data, route to adjusters, track approvals, and generate reports.",
+        how: [
+          "Outlook trigger captures incoming claim emails with attachments",
+          "AI Builder extracts claim data from PDFs (type, amount, policy #)",
+          "Approval flow routes to appropriate adjuster based on claim type",
+          "Auto-updates SharePoint tracker and sends Teams notification on completion",
+        ],
+      },
+    },
+    {
+      name: "AWS API Gateway",
+      tier: "Cloud-Native / Developer-Focused",
+      tagline: "Managed API Endpoint for Serverless Backends",
+      logo: "☁️",
+      what: [
+        "Create, publish, and manage REST and WebSocket APIs at any scale",
+        "Built-in authentication (Cognito, IAM, Lambda authorizers)",
+        "Rate limiting and throttling to prevent API abuse",
+        "Seamless integration with Lambda, DynamoDB, S3, and other AWS services",
+        "Usage plans and API keys for third-party developer access",
+      ],
+      when: [
+        "Building a serverless backend (Lambda + API Gateway)",
+        "Exposing internal services as public APIs",
+        "Need rate limiting, authentication, and usage monitoring",
+        "Mobile app or web app needs a managed API layer",
+      ],
+      roleplay: '"Our mobile app communicates through AWS API Gateway, which handles authentication, rate limiting, and routing to our Lambda functions — so we get a fully managed, auto-scaling API layer with zero server management."',
+      pros: [
+        "Fully managed and auto-scaling",
+        "Strong security: auth, throttling, WAF integration",
+        "Pay-per-call pricing ($3.50/million calls)",
+        "Native AWS ecosystem integration",
+      ],
+      cons: [
+        "AWS vendor lock-in",
+        "Requires development skills",
+        "Costs can spike with high traffic",
+      ],
+      cost: "$3.50/million API calls + data transfer fees",
+      useCase: {
+        title: "Mobile App — Order Tracking & Payment API",
+        scenario: "A delivery app needs a public API that handles order placement, real-time tracking, and payment processing — with authentication and rate limiting.",
+        how: [
+          "REST API endpoints for /orders, /tracking, /payments",
+          "Cognito handles user authentication and JWT tokens",
+          "Lambda functions process business logic serverlessly",
+          "Rate limiting prevents abuse (1,000 requests/min per user)",
+        ],
+      },
+    },
+  ],
+  ai: [
+    {
+      name: "NVIDIA NemoClaw + OpenClaw",
+      tier: "Enterprise",
+      tagline: "Open-Source AI Agent Platform with Enterprise Security",
+      logo: "🟩",
+      what: [
+        "Open-source platform for building and deploying autonomous AI agents",
+        "OpenShell runtime: sandboxed execution with policy-based security guardrails",
+        "Privacy Router: ensures sensitive data never leaks to cloud LLMs",
+        "Hardware-agnostic — runs on any hardware, not just NVIDIA GPUs",
+        "Supports local models (Nemotron) and cloud models (OpenAI, Anthropic)",
+        "Announced at GTC 2026 — described as 'the OS for personal AI'",
+      ],
+      when: [
+        "Enterprise needs always-on AI agents with strict security controls",
+        "Regulated industry requiring data privacy and network guardrails",
+        "Building AI agents that take autonomous actions (not just chat)",
+        "Want open-source with no vendor lock-in",
+      ],
+      roleplay: '"For deploying AI agents across our workforce, NemoClaw provides the security layer enterprises have been waiting for — OpenShell sandboxes each agent with defined permissions, and the Privacy Router keeps sensitive data from ever reaching external LLMs."',
+      pros: [
+        "Open-source with enterprise-grade security",
+        "Sandboxed agent execution (OpenShell)",
+        "Privacy Router for data protection",
+        "Hardware-agnostic — no GPU lock-in",
+        "Backed by NVIDIA's ecosystem",
+      ],
+      cons: [
+        "Brand new (March 2026) — still maturing",
+        "Enterprise deployment requires significant expertise",
+        "Potential NVIDIA ecosystem dependency long-term",
+        "Documentation still catching up to features",
+      ],
+      cost: "Free (open-source) · Hardware costs vary · Enterprise support TBD",
+      useCase: {
+        title: "Defense Contractor — Secure AI Research Assistants",
+        scenario: "A defense company needs AI agents that can research public documents, summarize findings, and draft reports — but classified data must never leave the company network.",
+        how: [
+          "NemoClaw agents run on-prem on DGX Station hardware",
+          "OpenShell sandboxes restrict each agent to approved file paths and network endpoints",
+          "Privacy Router blocks all external LLM calls for classified projects",
+          "Local Nemotron models handle sensitive tasks; cloud models handle public research only",
+        ],
+      },
+    },
+    {
+      name: "Claude / ChatGPT API + n8n",
+      tier: "Mid-Size / Technical Teams",
+      tagline: "AI-Powered Workflows via API Integration",
+      logo: "💬",
+      what: [
+        "Integrate frontier LLMs (Claude, GPT-4, Gemini) directly into automation workflows",
+        "n8n's AI Agent node chains multiple LLM calls with tool use",
+        "Build AI assistants that read emails, summarize docs, draft responses",
+        "Human-in-the-loop: AI suggests, human approves before action",
+        "Self-hosted with n8n = your data stays on your servers",
+      ],
+      when: [
+        "Need AI processing embedded in existing business workflows",
+        "Automating document analysis, email triage, content generation",
+        "Want human oversight over AI decisions before they execute",
+        "Technical team comfortable with API integration",
+      ],
+      roleplay: "\"By connecting Claude's API to our n8n workflow, we can automatically triage incoming support tickets — AI classifies urgency, drafts a response, and routes to the right team, with a human approving before anything is sent.\"",
+      pros: [
+        "Access to the most capable AI models",
+        "Full control over prompts and logic",
+        "Self-hosted n8n keeps data private",
+        "Human-in-the-loop for safety",
+        "Pay only for API usage",
+      ],
+      cons: [
+        "Requires technical setup (API keys, workflow design)",
+        "API costs can add up with high volume",
+        "Model behavior can vary — needs prompt engineering",
+      ],
+      cost: "API costs: ~$3-15/million tokens (varies by model) + n8n hosting",
+      useCase: {
+        title: "Law Firm — AI-Assisted Contract Review",
+        scenario: "A mid-size law firm reviews 200+ contracts/month and wants AI to flag risky clauses, summarize terms, and draft revision suggestions for attorneys to review.",
+        how: [
+          "n8n workflow ingests new contracts from cloud storage",
+          "Claude API analyzes each contract for risky clauses and non-standard terms",
+          "AI generates a summary + risk report for each contract",
+          "Attorney reviews AI output in a dashboard and approves/edits before sending to client",
+        ],
+      },
+    },
+    {
+      name: "HubSpot AI / Zapier AI Actions",
+      tier: "Small Business / Non-Technical",
+      tagline: "Built-In AI for Everyday Business Tasks",
+      logo: "✨",
+      what: [
+        "AI features built directly into tools you already use (no API needed)",
+        "HubSpot: AI-generated emails, content, chatbots, and lead scoring",
+        "Zapier AI Actions: summarize text, classify data, extract info, generate content",
+        "No coding or API setup — just toggle AI features on",
+        "Works within existing business workflows automatically",
+      ],
+      when: [
+        "Small business wants AI without technical complexity",
+        "Already using HubSpot for CRM or Zapier for automation",
+        "Need AI for common tasks: email writing, summarization, classification",
+        "No budget or expertise for custom AI development",
+      ],
+      roleplay: "\"We don't need a custom AI setup — HubSpot's built-in AI generates our marketing emails and scores leads automatically, while Zapier's AI actions summarize customer feedback into weekly reports, all without any coding.\"",
+      pros: [
+        "Zero technical setup",
+        "AI built into tools you already use",
+        "Accessible to non-technical users",
+        "Included in existing subscription costs",
+      ],
+      cons: [
+        "Limited customization compared to API approach",
+        "AI capabilities are basic compared to direct API access",
+        "Dependent on platform's AI feature roadmap",
+      ],
+      cost: "Included in existing plans · HubSpot: Free CRM → $800+/mo · Zapier: $19.99+/mo",
+      useCase: {
+        title: "Real Estate Agency — AI-Powered Lead Nurturing",
+        scenario: "A small real estate team wants to automatically respond to new property inquiries, score leads by buying intent, and generate personalized follow-up emails.",
+        how: [
+          "HubSpot AI chatbot handles initial inquiries on website 24/7",
+          "AI lead scoring ranks prospects by engagement and intent signals",
+          "AI generates personalized property recommendation emails",
+          "Zapier AI summarizes weekly lead activity into a digest for the team",
+        ],
+      },
+    },
+  ],
+};
+
+const COMPARISON_TABLES = {
+  automation: {
+    headers: ["Feature", "n8n 🟣", "Make 🟡", "Zapier 🟠"],
+    rows: [
+      ["Best For", "Enterprise, self-hosted, full control", "Mid-size, complex visual workflows", "Small biz, quick no-code setup"],
+      ["Coding?", "Optional (JS/Python)", "No-code (visual)", "No-code"],
+      ["Integrations", "400+ native + any API", "3,000+", "8,000+"],
+      ["AI Support", "Native AI Agent nodes", "AI modules (GPT, Claude)", "Built-in AI actions"],
+      ["Security", "Self-hosted, SSO, audit logs", "SOC 2 Type II, GDPR", "SOC 2 Type II"],
+      ["Pricing Model", "Per execution (or free self-hosted)", "Per credit (per step)", "Per task (completed actions)"],
+      ["Free Tier", "Unlimited (self-hosted)", "1,000 credits/mo", "100 tasks/mo"],
+    ],
+  },
+  databases: {
+    headers: ["Feature", "PostgreSQL 🐘", "MongoDB 🍃", "Firebase 🔥"],
+    rows: [
+      ["Type", "Relational (SQL)", "Document (NoSQL)", "Cloud Document (NoSQL)"],
+      ["Best For", "Complex relationships, analytics", "Flexible schemas, rapid dev", "Real-time mobile/web apps"],
+      ["Schema", "Rigid (defined upfront)", "Flexible (schema-less)", "Flexible (collections)"],
+      ["Scaling", "Vertical (+ read replicas)", "Horizontal (sharding)", "Auto-managed by Google"],
+      ["ACID", "Full", "Supported (since v4.0)", "Supported"],
+      ["Cost", "Free (open-source)", "Free tier → pay-as-you-go", "Free tier → pay-as-you-go"],
+    ],
+  },
+  deployment: {
+    headers: ["Feature", "NGINX 🟢", "AWS EB ☁️", "Traefik 🔵"],
+    rows: [
+      ["Best For", "High-perf reverse proxy", "Managed cloud deployment", "Docker/K8s auto-routing"],
+      ["Blue-Green?", "Config-based switching", "Built-in URL swap", "Via container labels"],
+      ["SSL", "Manual or certbot", "AWS Certificate Manager", "Auto Let's Encrypt"],
+      ["Scaling", "Manual (+ upstream config)", "Auto-scaling built in", "Container orchestration"],
+      ["Cost", "Free", "Pay for AWS resources", "Free (open-source)"],
+    ],
+  },
+  integration: {
+    headers: ["Feature", "MuleSoft 🧩", "Power Automate ⚙️", "AWS API GW ☁️"],
+    rows: [
+      ["Best For", "Enterprise system integration", "Microsoft 365 automation", "Serverless API management"],
+      ["Coding?", "Medium-High (DataWeave)", "Low-code + expressions", "Yes (Lambda functions)"],
+      ["Security", "Enterprise-grade", "Microsoft security stack", "IAM, Cognito, WAF"],
+      ["Cost", "$100K+/year", "$15-40/user/mo", "$3.50/million API calls"],
+      ["Scalability", "Enterprise-grade", "Good within MS ecosystem", "Unlimited (auto-scaling)"],
+    ],
+  },
+  ai: {
+    headers: ["Feature", "NemoClaw 🟩", "Claude/GPT + n8n 💬", "HubSpot/Zapier AI ✨"],
+    rows: [
+      ["Best For", "Enterprise AI agent deployment", "Custom AI workflows", "Built-in AI for SMBs"],
+      ["Coding?", "Yes (YAML policies, config)", "Medium (API + workflow)", "None"],
+      ["Data Privacy", "Full on-prem, Privacy Router", "Self-hosted n8n option", "Cloud-dependent"],
+      ["AI Capability", "Autonomous agents w/ guardrails", "Full LLM API access", "Pre-built AI features"],
+      ["Cost", "Free (OSS) + hardware", "API tokens + hosting", "Included in subscription"],
+      ["Maturity", "New (March 2026)", "Established", "Established"],
+    ],
+  },
+};
+
+const MEMORY_TRICKS = {
+  automation: [
+    { emoji: "🟣", tool: "n8n", trick: "Enterprise Power, Self-Hosted, Full Control" },
+    { emoji: "🟡", tool: "Make", trick: "Visual Builder, Complex Branching, Mid-Size" },
+    { emoji: "🟠", tool: "Zapier", trick: "No-Code, 8,000+ Apps, Quick Setup" },
+  ],
+  databases: [
+    { emoji: "🐘", tool: "PostgreSQL", trick: "Complex Queries, ACID, Enterprise SQL" },
+    { emoji: "🍃", tool: "MongoDB", trick: "Flexible Schema, JSON Docs, Scale Out" },
+    { emoji: "🔥", tool: "Firebase", trick: "Real-Time Sync, Mobile-First, Zero Backend" },
+  ],
+  deployment: [
+    { emoji: "🟢", tool: "NGINX", trick: "Fast Proxy, Load Balance, Blue-Green Config" },
+    { emoji: "☁️", tool: "AWS EB", trick: "Managed Cloud, Auto-Scale, URL Swap" },
+    { emoji: "🔵", tool: "Traefik", trick: "Docker Auto-Discovery, Free SSL, Labels" },
+  ],
+  integration: [
+    { emoji: "🧩", tool: "MuleSoft", trick: "Enterprise APIs, $100K+, Fortune 500" },
+    { emoji: "⚙️", tool: "Power Automate", trick: "Microsoft Native, RPA, AI Builder" },
+    { emoji: "☁️", tool: "AWS API GW", trick: "Serverless APIs, Pay-Per-Call, Lambda" },
+  ],
+  ai: [
+    { emoji: "🟩", tool: "NemoClaw", trick: "Open-Source Agents, Sandboxed, On-Prem" },
+    { emoji: "💬", tool: "LLM + n8n", trick: "Custom AI Workflows, Human-in-Loop" },
+    { emoji: "✨", tool: "Built-In AI", trick: "Zero Setup, Everyday Tasks, SMB-Ready" },
+  ],
+};
+
+// ── State ──────────────────────────────────────────────────
+let activeCategory = "automation";
+let expandedTools = {};
+let showComparison = false;
+
+// ── HTML escape ────────────────────────────────────────────
+function e(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+// ── Render helpers ─────────────────────────────────────────
+function liItems(items, bullet = "•", small = false) {
+  return items.map(item =>
+    `<div class="li-item" style="font-size:${small ? "13.5px" : "14.5px"}">
+       <span class="li-bullet">${bullet}</span><span>${e(item)}</span>
+     </div>`
+  ).join("");
+}
+
+function renderToolBody(tool, color) {
+  return `
+    <div class="tool-body">
+      <div class="tool-body-inner">
+        <div class="mb-12">
+          <div class="section-label" style="color:${color}">What It Does</div>
+          ${liItems(tool.what)}
+        </div>
+        <div class="mb-12">
+          <div class="section-label" style="color:${color}">When to Use in Role-Play</div>
+          ${liItems(tool.when, "✔")}
+        </div>
+        <div class="roleplay-quote" style="background:${color}0a;border-left:4px solid ${color}">${e(tool.roleplay)}</div>
+        <div class="pros-cons-grid">
+          <div>
+            <div class="section-label" style="color:#10b981">Pros</div>
+            ${liItems(tool.pros, "✅", true)}
+          </div>
+          <div>
+            <div class="section-label" style="color:#ef4444">Cons</div>
+            ${liItems(tool.cons, "❌", true)}
+          </div>
+        </div>
+        <div class="cost-box">💲 ${e(tool.cost)}</div>
+        <div class="use-case">
+          <div class="use-case-title">📋 ${e(tool.useCase.title)}</div>
+          <div class="use-case-scenario">${e(tool.useCase.scenario)}</div>
+          <div class="section-label" style="color:${color}">How It Helps</div>
+          ${liItems(tool.useCase.how, "→", true)}
+        </div>
+      </div>
+    </div>`;
+}
+
+// ── Main render ────────────────────────────────────────────
+function render() {
+  const cat = CATEGORIES.find(c => c.id === activeCategory);
+
+  // Category nav
+  document.getElementById("cat-nav").innerHTML = CATEGORIES.map(c => {
+    const active = c.id === activeCategory;
+    return `<button class="cat-btn" data-id="${c.id}"
+      style="background:${active ? c.color + "20" : "var(--bg-card)"};
+             color:${active ? c.color : "var(--text-secondary)"};
+             box-shadow:${active ? `0 0 0 1.5px ${c.color}50` : "none"}">
+      <span class="cat-icon">${c.icon}</span>${e(c.label)}
+    </button>`;
+  }).join("");
+
+  document.querySelectorAll(".cat-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeCategory = btn.dataset.id;
+      showComparison = false;
+      render();
+    });
+  });
+
+  // Section header
+  document.getElementById("section-title").style.color = cat.color;
+  document.getElementById("section-title").innerHTML = `<span>${cat.icon}</span> ${e(cat.label)}`;
+
+  const toggleBtn = document.getElementById("toggle-btn");
+  toggleBtn.style.background = showComparison ? cat.color + "20" : cat.color + "10";
+  toggleBtn.style.color = cat.color;
+  toggleBtn.textContent = (showComparison ? "Hide" : "Show") + " Comparison";
+  toggleBtn.onclick = () => { showComparison = !showComparison; render(); };
+
+  // Comparison table
+  const compWrap = document.getElementById("comparison-wrap");
+  if (showComparison) {
+    const data = COMPARISON_TABLES[activeCategory];
+    compWrap.innerHTML = `
+      <div class="table-wrap">
+        <table class="comp-table">
+          <thead><tr>${data.headers.map(h =>
+            `<th style="background:${cat.color}12;color:${cat.color};border-bottom:1px solid var(--border)">${e(h)}</th>`
+          ).join("")}</tr></thead>
+          <tbody>${data.rows.map((row, ri) =>
+            `<tr>${row.map((cell, ci) =>
+              `<td style="
+                border-bottom:${ri < data.rows.length - 1 ? "1px solid var(--border)" : "none"};
+                background:${ci === 0 ? "var(--bg-subtle)" : "var(--bg-card)"};
+                font-weight:${ci === 0 ? 600 : 400};
+                color:${ci === 0 ? "var(--text-primary)" : "var(--text-secondary)"}
+              ">${e(cell)}</td>`
+            ).join("")}</tr>`
+          ).join("")}</tbody>
+        </table>
+      </div>`;
+  } else {
+    compWrap.innerHTML = "";
+  }
+
+  // Memory tricks
+  const tricks = MEMORY_TRICKS[activeCategory];
+  document.getElementById("memory-wrap").innerHTML = `
+    <div class="memory-block" style="background:${cat.color}08">
+      <div class="memory-title">🎯 Quick Memory Trick</div>
+      ${tricks.map(t => `
+        <div class="memory-item">
+          <span class="memory-emoji">${t.emoji}</span>
+          <span class="memory-tool" style="color:${cat.color}">${e(t.tool)}</span>
+          <span class="memory-trick">${e(t.trick)}</span>
+        </div>`).join("")}
+    </div>`;
+
+  // Tool cards
+  const tools = TOOLS[activeCategory];
+  document.getElementById("tools-list").innerHTML = tools.map(tool => {
+    const expanded = !!expandedTools[tool.name];
+    const shadow = expanded ? `0 0 0 1px ${cat.color}30, 0 6px 24px ${cat.color}10` : "none";
+    return `
+      <div class="tool-card" style="box-shadow:${shadow}">
+        <button class="tool-header" data-tool="${e(tool.name)}">
+          <span class="tool-logo">${tool.logo}</span>
+          <div class="tool-info">
+            <div class="tool-name-row">
+              <span class="tool-name">${e(tool.name)}</span>
+              <span class="badge" style="background:${cat.color}18;color:${cat.color}">${e(tool.tier)}</span>
+            </div>
+            <div class="tool-tagline">${e(tool.tagline)}</div>
+          </div>
+          <span class="tool-chevron ${expanded ? "expanded" : ""}">▼</span>
+        </button>
+        ${expanded ? renderToolBody(tool, cat.color) : ""}
+      </div>`;
+  }).join("");
+
+  document.querySelectorAll(".tool-header").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const name = btn.dataset.tool;
+      expandedTools[name] = !expandedTools[name];
+      render();
+    });
+  });
+}
+
+render();
+</script>
+</body>
+</html>
